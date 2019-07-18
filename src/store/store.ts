@@ -1,27 +1,27 @@
-// import { applyMiddleware, combineReducers, createStore } from 'redux';
-// // tslint:disable-next-line: no-implicit-dependencies
-// import { composeWithDevTools } from 'redux-devtools-extension';
-// import reduxThunk from 'redux-thunk';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+// tslint:disable-next-line: no-implicit-dependencies
+import { composeWithDevTools } from 'redux-devtools-extension';
+import reduxThunk from 'redux-thunk';
 
-// import * as reducers from './reducers';
+import * as reducers from './reducers';
 // import { InspireStateType } from './reducers/inspire';
-// import { SessionStateType } from './reducers/session';
+import { SessionStateType } from './reducers/session';
 
-// export type ReducerStateType = {
-//   inspire: InspireStateType,
-//   session: SessionStateType,
-// };
+export type ReducerStateType = {
+  // inspire: InspireStateType,
+  session: SessionStateType,
+};
 
-// export const configureStore = () => {
-//   const rootReducer = combineReducers(reducers);
-//   const composeEnhancers = composeWithDevTools({});
+export const configureStore = () => {
+  const rootReducer = combineReducers(reducers);
+  const composeEnhancers = composeWithDevTools({});
 
-//   return createStore(
-//     rootReducer,
-//     composeEnhancers(applyMiddleware(reduxThunk))
-//   );
-// };
+  return createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(reduxThunk))
+  );
+};
 
-// const store = configureStore();
+const store = configureStore();
 
-export default 'store';
+export default store;

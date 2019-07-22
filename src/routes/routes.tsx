@@ -1,15 +1,14 @@
 import * as React from 'react';
-import LoginPage from 'containers/Login';
 
 export type RouteType = {
-  // tslint:disable-next-line: no-any
-  component: React.ComponentType<any>,
+  component: React.LazyExoticComponent<React.ComponentType<unknown>>,
   exact: boolean,
   isPrivate: boolean,
   path: string,
 };
 
-const Inspre: React.FC = () => (<h1>Inspire page</h1>);
+const LoginPage = React.lazy(() => import('containers/Login'));
+const InspirePage = React.lazy(() => import('containers/Inspire'));
 
 export const defaultRoute: RouteType = {
   component: LoginPage,
@@ -21,7 +20,7 @@ export const defaultRoute: RouteType = {
 const routes: RouteType[] = [
   defaultRoute,
   {
-    component: Inspre,
+    component: InspirePage,
     exact: true,
     isPrivate: true,
     path: '/',

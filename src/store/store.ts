@@ -3,13 +3,13 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reduxThunk from 'redux-thunk';
 
-import * as reducers from './reducers';
-// import { InspireStateType } from './reducers/inspire';
-import { SessionStateType } from './reducers/session';
+import * as reducers from 'store/reducers';
+import { InspireState } from 'store/reducers/inspire';
+import { SessionState } from 'store/reducers/session';
 
-export type ReducerStateType = {
-  // inspire: InspireStateType,
-  session: SessionStateType,
+export type StoreState = {
+  inspire: InspireState,
+  session: SessionState,
 };
 
 export const configureStore = () => {

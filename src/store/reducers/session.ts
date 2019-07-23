@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import createReducer from 'utils/createReducer';
 
-import { sessionActions } from 'store/actions/index';
+import { sessionActions as types } from 'store/actions/index';
 import { LoginAction } from 'store/actions/session';
 import helpers from 'utils/helpers';
 
@@ -10,7 +10,7 @@ export type UserDetails = {
   password?: string,
 };
 
-export type SessionStateType = {
+export type SessionState = {
   isAuthenticated: boolean,
   user: UserDetails,
 };
@@ -26,10 +26,10 @@ const getAuthState = () => {
 };
 
 const authReducer = createReducer(getAuthState())({
-  [sessionActions.LOGIN]: () => 'logging',
-  [sessionActions.LOGIN_COMPLETED]: () => true,
-  [sessionActions.LOGIN_FAILED]: () => false,
-  [sessionActions.LOGOUT]: () => false,
+  [types.LOGIN]: () => 'logging',
+  [types.LOGIN_COMPLETED]: () => true,
+  [types.LOGIN_FAILED]: () => false,
+  [types.LOGOUT]: () => false,
 });
 
 const initialUser: UserDetails = {
@@ -44,7 +44,7 @@ const getInitialUser = () => {
 };
 
 const userReducer = createReducer(getInitialUser())({
-  [sessionActions.LOGIN_COMPLETED]: (state: SessionStateType, action: LoginAction) => {
+  [types.LOGIN_COMPLETED]: (state: SessionState, action: LoginAction) => {
     const { name, password } = action.payload;
 
     return {
@@ -53,7 +53,7 @@ const userReducer = createReducer(getInitialUser())({
       password,
     };
   },
-  [sessionActions.LOGIN_FAILED]: () => ({ error: 'User could not log in' }),
+  [types.LOGIN_FAILED]: () => ({ error: 'User could not log in' }),
 });
 
 export default combineReducers({

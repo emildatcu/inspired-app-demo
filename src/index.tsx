@@ -1,19 +1,19 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import App from './containers/App';
+import App from 'containers/App';
+import store from 'store/store';
+import * as serviceWorker from 'utils/serviceWorker';
 import './index.css';
-import * as serviceWorker from './utils/serviceWorker';
-
-// const store = configureStore();
 
 const RootHtml = () => (
-  // <Provider store={store}>
+  <Provider store={store}>
     <Router>
       <App />
     </Router>
-  // </Provider>
+  </Provider>
 );
 
 ReactDOM.render(

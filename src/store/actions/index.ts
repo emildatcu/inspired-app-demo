@@ -1,1 +1,5 @@
-export default 'actions';
+import * as sessionActions from './sessionActionTypes';
+
+export {
+  sessionActions,
+};

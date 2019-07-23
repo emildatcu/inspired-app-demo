@@ -1,8 +1,6 @@
 import * as React from 'react';
-// import {
-//   InspirePage,
-//   LoginPage,
-// } from 'containers';
+
+import Login from 'containers/Login';
 
 export type RouteType = {
   // tslint:disable-next-line: no-any
@@ -12,11 +10,10 @@ export type RouteType = {
   path: string,
 };
 
-const Logn: React.FC = () => (<h1>Login page</h1>);
 const Inspre: React.FC = () => (<h1>Inspire page</h1>);
 
 export const defaultRoute: RouteType = {
-  component: Logn,
+  component: Login,
   exact: false,
   isPrivate: false,
   path: '/login',

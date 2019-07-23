@@ -15,7 +15,7 @@ import {
 
 import { login } from 'store/actions/session';
 import { UserDetails } from 'store/reducers/session';
-import { ReducerStateType } from 'store/store';
+import { StoreState } from 'store/store';
 
 type MapStateToProps = {
   isAuthenticated: boolean,
@@ -52,7 +52,14 @@ const Login: React.FC<PropsType> = (props) => {
       <Paper className={classes.root}>
       <h1>Login page</h1>
         <Grid container={true} justify="center" alignItems="center">
-          <Grid container={true} item={true} justify="center" spacing={3} direction="column" className={classes.form}>
+          <Grid
+            container={true}
+            item={true}
+            justify="center"
+            spacing={3}
+            direction="column"
+            className={classes.form}
+          >
             <img src="https://s4.scoopwhoop.com/anj/modefam/85004845.gif" alt="How you doin'?" />
           </Grid>
           <TextField
@@ -79,7 +86,7 @@ const Login: React.FC<PropsType> = (props) => {
   );
 };
 
-const mapStateToProps = ({ session }: ReducerStateType) => {
+const mapStateToProps = ({ session }: StoreState) => {
   const { isAuthenticated } = session;
 
   return {
@@ -92,10 +99,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   login: (values: UserDetails) => dispatch<any>(login(values)),
 });
 
-// tslint:disable-next-line: no-any
-const enhance = compose<PropsType, any>(
+const enhance = compose<PropsType, OwnProps>(
   connect(mapStateToProps, mapDispatchToProps),
-  withStyles(loginStyles, { withTheme: true })
+  withStyles(loginStyles, { withTheme: true }),
 );
 
 export default enhance(Login);

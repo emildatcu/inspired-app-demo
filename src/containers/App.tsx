@@ -17,7 +17,7 @@ import logo2xPng from 'assets/logo2x.png';
 import routes, { defaultRoute, RouteType } from 'routes/routes';
 import { logout } from 'store/actions/session';
 import { UserDetails } from 'store/reducers/session';
-import { ReducerStateType } from 'store/store';
+import { StoreState } from 'store/store';
 import appStyles, { theme } from './appStyles';
 
 type MapStateToProps = {
@@ -29,9 +29,12 @@ type MapDispatchToProps = {
   logout: () => void;
 };
 
-type PropsType = MapStateToProps & MapDispatchToProps;
+type OwnProps = {
+};
 
-const App: React.FC<PropsType> = (props) => {
+type Props = MapStateToProps & MapDispatchToProps & OwnProps;
+
+const App: React.FC<Props> = (props) => {
   const classes = appStyles();
   const { isAuthenticated, user } = props;
   const { Suspense } = React;
@@ -39,7 +42,7 @@ const App: React.FC<PropsType> = (props) => {
   const LogoutButton = () => (
     isAuthenticated && typeof isAuthenticated === 'boolean' ? (
       <p>
-        Welcome {user.name}! <> </>
+        Hello, {user.name}! <> </>
         <Button
           variant="contained"
           color="secondary"
@@ -132,17 +135,19 @@ const App: React.FC<PropsType> = (props) => {
         </Toolbar>
       </AppBar>
 
-      <Switch>
-        {routes.map(r => getRoute(r, isAuthenticated))}
-        <Suspense fallback={<LinearProgress color="secondary" />}>
-          <>Page not found!</>
-        </Suspense>
-      </Switch>
+      <Suspense fallback={<LinearProgress />}>
+        <Switch>
+          {routes.map(r => getRoute(r, isAuthenticated))}
+          <Suspense fallback={<LinearProgress color="secondary" />}>
+            <>Page not found!</>
+          </Suspense>
+        </Switch>
+      </Suspense>
     </ThemeProvider>
   );
 };
 
-const mapStateToProps = ({ session }: ReducerStateType) => {
+const mapStateToProps = ({ session }: StoreState) => {
   const { isAuthenticated, user } = session;
 
   return {
@@ -155,8 +160,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   logout: () => dispatch(logout()),
 });
 
-// tslint:disable-next-line: no-any
-const enhance = compose<PropsType, any>(
+const enhance = compose<Props, OwnProps>(
   connect(mapStateToProps, mapDispatchToProps),
 );
 

@@ -25,7 +25,6 @@
         "assets",
         "components",
         "containers",
-        "pages",
         "routes",
         "store",
         "utils"
@@ -41,7 +40,6 @@
       "assets",
       "components",
       "containers",
-      "pages",
       "routes",
       "store",
       "themes",

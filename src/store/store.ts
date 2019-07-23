@@ -18,7 +18,7 @@ export const configureStore = () => {
 
   return createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(reduxThunk))
+    composeEnhancers(applyMiddleware(reduxThunk)),
   );
 };
 

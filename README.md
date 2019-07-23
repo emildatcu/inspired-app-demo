@@ -1,9 +1,15 @@
-# inspired demo app
+# !nspired demo app
 
 Sample fun project made with react, typescript, redux, routes (private routes), and lazy loading for components
 
 - login page
 - !nspire page - rss parser that transforms pinterest rss feeds into json and displays posts with uninspirational quotes
+- redux store for session management and posts
+- routing with protected route
+- persistent session
+
+In order to run the app, just clone the repo, cd inspired-demo app, npm install and npm start... Enjoy! :D
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -39,4 +45,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-# inspired demo app

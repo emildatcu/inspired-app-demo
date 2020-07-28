@@ -1,5 +1,9 @@
 import { inspireActions as types } from 'store/actions';
-import { InspireActions } from 'store/actions/inspire';
+import {
+  FetchPostsAction,
+  GetPostAction,
+  InspireActions,
+} from 'store/actions/inspire';
 import createReducer from 'utils/createReducer';
 import helpers from 'utils/helpers';
 
@@ -36,7 +40,7 @@ const inspireReducer = createReducer(initialState)({
     ...state,
     inspirationLevel: state.inspirationLevel <= 0 ? 0 : state.inspirationLevel - 1,
   }),
-  [types.FETCH_POSTS_SUCCESS]: (state: InspireState, action: InspireActions) => {
+  [types.FETCH_POSTS_SUCCESS]: (state: InspireState, action: FetchPostsAction) => {
     const { posts: allPosts } = action;
 
     const posts = allPosts.map(({ content: oldContent, link, title, pubDate }) => {
@@ -61,7 +65,7 @@ const inspireReducer = createReducer(initialState)({
       postsCount: posts.length,
     };
   },
-  [types.GET_POST]: (state: InspireState, action: InspireActions) => {
+  [types.GET_POST]: (state: InspireState, action: GetPostAction) => {
     const { posts } = state;
 
     return {

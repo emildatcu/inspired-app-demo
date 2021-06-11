@@ -2,23 +2,25 @@ import { Dispatch } from 'redux';
 import { inspireActions as types } from 'store/actions';
 import { TPost } from 'store/reducers/inspire';
 
+// TODO: use redux toolkit instead for generating actions
+
 type IncrementInspiration = {
-  type: types.INCREMENT_INSPIRATION,
+  type: types.INCREMENT_INSPIRATION;
 };
 const incrementInspiration = (): IncrementInspiration => ({
   type: types.INCREMENT_INSPIRATION,
 });
 
 type DecrementInspiration = {
-  type: types.DECREMENT_INSPIRATION,
+  type: types.DECREMENT_INSPIRATION;
 };
 const decrementInspiration = (): DecrementInspiration => ({
   type: types.DECREMENT_INSPIRATION,
 });
 
 export type GetPostAction = {
-  payload: number,
-  type: types.GET_POST,
+  payload: number;
+  type: types.GET_POST;
 };
 const getPost = (payload: number): GetPostAction => ({
   payload,
@@ -26,13 +28,13 @@ const getPost = (payload: number): GetPostAction => ({
 });
 
 export type FetchPostsAction = {
-  posts: TPost[],
-  type: types.FETCH_POSTS_SUCCESS,
+  posts: TPost[];
+  type: types.FETCH_POSTS_SUCCESS;
 };
 
 type Source = {
-  username: string,
-  feed: string,
+  username: string;
+  feed: string;
 };
 const fetchPosts = () => {
   return async (dispatch: Dispatch) => {
@@ -47,10 +49,12 @@ const fetchPosts = () => {
       { username: 'aharrison0104', feed: 'uninspirational-quotes' },
       { username: 'randimcdowall', feed: 'uninspirational-quotes' },
       { username: 'karenshaver1', feed: 'uninspirational-quotes' },
-      { username: 'janeprichardson', feed: 'very-demotivational-uninspirational-quotesparody-h' },
+      {
+        username: 'janeprichardson',
+        feed: 'very-demotivational-uninspirational-quotesparody-h',
+      },
       { username: 'ashleacourtney', feed: 'uninspirational-quotes' },
       { username: 'ErinLouiseHeine', feed: 'uninspirational-quotes' },
-
     ];
 
     await (async () => {
@@ -68,12 +72,8 @@ const fetchPosts = () => {
   };
 };
 
-export type InspireActions = ReturnType<typeof decrementInspiration> |
-  ReturnType<typeof incrementInspiration>;
+export type InspireActions =
+  | ReturnType<typeof decrementInspiration>
+  | ReturnType<typeof incrementInspiration>;
 
-export {
-  decrementInspiration,
-  fetchPosts,
-  getPost,
-  incrementInspiration,
-};
+export { decrementInspiration, fetchPosts, getPost, incrementInspiration };

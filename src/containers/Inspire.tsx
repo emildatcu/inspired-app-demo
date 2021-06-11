@@ -43,10 +43,12 @@ type OwnProps = {};
 type Props = OwnProps & MapStateToProps & MapDispatchToProps & WithStyles<typeof inspireStyles>;
 type State = {
   used: number[],
+  show: boolean,
 };
 class Inspire extends React.Component<Props, State> {
   state: State = {
     used: [0],
+    show: true,
   };
 
   componentDidMount() {
@@ -88,6 +90,12 @@ class Inspire extends React.Component<Props, State> {
       'Title comes here...'
   )
 
+  showHide() {
+    this.setState((prevState) => ({
+      show: !prevState.show
+    }));
+  }
+
   render() {
     const {
       classes,
@@ -118,7 +126,10 @@ class Inspire extends React.Component<Props, State> {
             </Toolbar>
           </AppBar>
         </Grid>
-        <LazyLoad show={post && !!post.content}>
+        <Button variant="contained" color="primary" onClick={this.showHide.bind(this)}>
+          show/hide
+        </Button>
+        <LazyLoad show={post && !!post.content && this.state.show}>
           <Grid item={true}>
             <Post
               title={this.getTitle(post)}

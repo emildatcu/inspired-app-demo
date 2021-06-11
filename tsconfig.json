@@ -3,37 +3,35 @@
     "baseUrl": "src",
     "rootDir": "src",
     "outDir": "build/dist",
-    "module": "esnext",
-    "target": "es5",
-    "lib": [
-      "es6",
-      "dom",
-      "esnext",
-      "dom.iterable",
-      "es2017"
-    ],
-    "sourceMap": true,
+    "target": "es6",
+    "lib": ["es6", "dom", "esnext", "dom.iterable", "es2017"],
     "allowJs": true,
-    "jsx": "preserve",
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "declaration": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "experimentalDecorators": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
+    "alwaysStrict": true,
     "importHelpers": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "skipLibCheck": true,
     "strictFunctionTypes": false,
-    "strict": true,
-    "noEmit": true,
-    "resolveJsonModule": true,
     "noUnusedParameters": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "noFallthroughCasesInSwitch": true
   },
   "exclude": [
     "node_modules",
@@ -52,7 +50,5 @@
       "suppressWhileTypeErrorsPresent": true
     }
   ],
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

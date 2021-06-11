@@ -34,7 +34,7 @@ const initialState: InspireState = {
 const inspireReducer = createReducer(initialState)({
   [types.INCREMENT_INSPIRATION]: (state: InspireState, _action: InspireActions) => ({
     ...state,
-    inspirationLevel: state.inspirationLevel >= 28 ? 28 : state.inspirationLevel + 1,
+    inspirationLevel: state.inspirationLevel >= 28 ? 28 : state.inspirationLevel + 1
   }),
   [types.DECREMENT_INSPIRATION]: (state: InspireState, _action: InspireActions) => ({
     ...state,

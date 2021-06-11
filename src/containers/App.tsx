@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
+import { Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import { compose } from 'recompose';
 import { Dispatch } from 'redux';
@@ -13,50 +13,38 @@ import {
   Typography,
 } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
-import logo2xPng from 'assets/logo2x.png';
+import logo2xPng from '../assets/logo2x.png';
 import routes, { defaultRoute, RouteType } from 'routes/routes';
 import { logout } from 'store/actions/session';
-import { UserDetails } from 'store/reducers/session';
 import { StoreState } from 'store/store';
 import appStyles, { theme } from './appStyles';
 
-type MapStateToProps = {
-  isAuthenticated: boolean,
-  user: UserDetails,
-};
-
-type MapDispatchToProps = {
-  logout: () => void;
-};
-
-type OwnProps = {
-};
-
-type Props = MapStateToProps & MapDispatchToProps & OwnProps;
-
-const App: React.FC<Props> = (props) => {
+const App = () => {
   const classes = appStyles();
-  const { isAuthenticated, user } = props;
-  const { Suspense } = React;
 
-  const LogoutButton = () => (
+  const { isAuthenticated, user } = useSelector(
+    ({ session }: StoreState) => session,
+  );
+
+  const dispatch = useDispatch();
+
+  const LogoutButton = () =>
     isAuthenticated && typeof isAuthenticated === 'boolean' ? (
       <p>
         Hello, {user.name}! <> </>
         <Button
           variant="contained"
           color="secondary"
-          onClick={props.logout}
+          onClick={() => dispatch(logout())}
         >
           Sign out
         </Button>
       </p>
     ) : (
       <></>
-    )
-  );
+    );
 
-  const getRoute = (rte: RouteType, isLoggedIn: boolean|string) => {
+  const getRoute = (rte: RouteType, isLoggedIn: boolean | string) => {
     const { component, exact, isPrivate, path } = rte;
 
     if (typeof isLoggedIn === 'string' && isLoggedIn === 'logging') {
@@ -67,14 +55,7 @@ const App: React.FC<Props> = (props) => {
         </div>
       );
 
-      return (
-        <Route
-          key={path}
-          path={path}
-          component={loader}
-          exact={exact}
-        />
-      );
+      return <Route key={path} path={path} component={loader} exact={exact} />;
     }
 
     if (isPrivate && !isLoggedIn) {
@@ -103,14 +84,7 @@ const App: React.FC<Props> = (props) => {
       );
     }
 
-    return (
-      <Route
-        key={path}
-        path={path}
-        component={component}
-        exact={exact}
-      />
-    );
+    return <Route key={path} path={path} component={component} exact={exact} />;
   };
 
   return (
@@ -130,14 +104,20 @@ const App: React.FC<Props> = (props) => {
       </AppBar>
       <AppBar position="static" color="secondary">
         <Toolbar className={classes.navBar}>
-          <Link to="/login" className={classes.link}> Login </Link>
-          <Link to="/" className={classes.link}> Get !nspired </Link>
+          <Link to="/login" className={classes.link}>
+            {' '}
+            Login{' '}
+          </Link>
+          <Link to="/" className={classes.link}>
+            {' '}
+            Get !nspired{' '}
+          </Link>
         </Toolbar>
       </AppBar>
 
       <Suspense fallback={<LinearProgress />}>
         <Switch>
-          {routes.map(r => getRoute(r, isAuthenticated))}
+          {routes.map((r) => getRoute(r, isAuthenticated))}
           <Suspense fallback={<LinearProgress color="secondary" />}>
             <>Page not found!</>
           </Suspense>
@@ -147,21 +127,4 @@ const App: React.FC<Props> = (props) => {
   );
 };
 
-const mapStateToProps = ({ session }: StoreState) => {
-  const { isAuthenticated, user } = session;
-
-  return {
-    isAuthenticated,
-    user,
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  logout: () => dispatch(logout()),
-});
-
-const enhance = compose<Props, OwnProps>(
-  connect(mapStateToProps, mapDispatchToProps),
-);
-
-export default enhance(App);
+export default App;

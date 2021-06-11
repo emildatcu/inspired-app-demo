@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 import loginStyles from './loginStyles';
 
 import {
-  Button,
+  Button as MUIButton,
   Grid,
   Paper,
   TextField,
@@ -18,16 +18,18 @@ import { UserDetails } from 'store/reducers/session';
 import { StoreState } from 'store/store';
 
 type MapStateToProps = {
-  isAuthenticated: boolean,
+  isAuthenticated: boolean;
 };
 
 type MapDispatchToProps = {
   login: (values: UserDetails) => void;
 };
 
-type OwnProps = {
-};
-type PropsType = MapStateToProps & MapDispatchToProps & OwnProps & WithStyles<typeof loginStyles>;
+type OwnProps = {};
+type PropsType = MapStateToProps &
+  MapDispatchToProps &
+  OwnProps &
+  WithStyles<typeof loginStyles>;
 
 const Login: React.FC<PropsType> = (props) => {
   const { classes } = props;
@@ -50,7 +52,7 @@ const Login: React.FC<PropsType> = (props) => {
   return (
     <Grid container={true} justify="center" alignContent="center">
       <Paper className={classes.root}>
-      <h1>Login page</h1>
+        <h1>Login page</h1>
         <Grid container={true} justify="center" alignItems="center">
           <Grid
             container={true}
@@ -60,7 +62,10 @@ const Login: React.FC<PropsType> = (props) => {
             direction="column"
             className={classes.form}
           >
-            <img src="https://s4.scoopwhoop.com/anj/modefam/85004845.gif" alt="How you doin'?" />
+            <img
+              src="https://s4.scoopwhoop.com/anj/modefam/85004845.gif"
+              alt="How you doin'?"
+            />
           </Grid>
           <TextField
             id="standard-name"
@@ -70,7 +75,7 @@ const Login: React.FC<PropsType> = (props) => {
             onChange={handleChange}
             margin="normal"
           />
-          <Button
+          <MUIButton
             variant="contained"
             type="button"
             color="primary"
@@ -79,7 +84,7 @@ const Login: React.FC<PropsType> = (props) => {
             disabled={values.disabled}
           >
             I'm ready
-          </Button>
+          </MUIButton>
         </Grid>
       </Paper>
     </Grid>
